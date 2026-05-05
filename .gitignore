@@ -1,0 +1,32 @@
+# Gradle files
+.gradle/
+build/
+/build/
+**/build/
+
+# Local configuration file (sdk path, API keys, etc.)
+local.properties
+
+# IntelliJ / Android Studio
+.idea/
+*.iml
+.DS_Store
+
+# Captured logs
+captures/
+
+# Keystore files
+*.jks
+*.keystore
+
+# External native build folder
+.externalNativeBuild/
+.cxx/
+
+# Google Services (contains sensitive Firebase config)
+# Uncomment the line below ONLY if you want to keep google-services.json private
+# google-services.json
+
+# OS files
+Thumbs.db
+.DS_Store
