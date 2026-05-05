@@ -1,5 +1,7 @@
 package com.example.gramaangana
 
+import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -19,12 +21,36 @@ class KeyHolderFragment : Fragment() {
         val timingsText = view.findViewById<TextView>(R.id.kh_timings)
         val callBtn = view.findViewById<Button>(R.id.btn_call)
         val statusText = view.findViewById<TextView>(R.id.kh_status)
+        val loggedInText = view.findViewById<TextView>(R.id.logged_in_as)
+        val logoutBtn = view.findViewById<Button>(R.id.btn_logout)
+
+        // Show logged-in user info
+        val prefs = requireContext().getSharedPreferences("grama_prefs", Context.MODE_PRIVATE)
+        val userName = prefs.getString("user_name", "User") ?: "User"
+        val userPhone = prefs.getString("user_phone", "") ?: ""
+        loggedInText.text = "👤 Logged in as: $userName ($userPhone)"
+
+        // Logout with confirmation
+        logoutBtn.setOnClickListener {
+            AlertDialog.Builder(requireContext())
+                .setTitle("Logout")
+                .setMessage("Are you sure you want to logout?")
+                .setPositiveButton("Yes, Logout") { _, _ ->
+                    prefs.edit().clear().apply()
+                    val intent = Intent(requireContext(), LoginActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                    requireActivity().finish()
+                    Toast.makeText(requireContext(), "✅ Logged out successfully", Toast.LENGTH_SHORT).show()
+                }
+                .setNegativeButton("Cancel", null)
+                .show()
+        }
 
         statusText.text = "Loading key holder info..."
 
         val ref = FirebaseDatabase.getInstance().getReference("keyholder")
 
-        // Seed default key holder if not exists (for demo)
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (!snapshot.exists()) {
