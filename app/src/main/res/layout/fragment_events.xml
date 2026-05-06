@@ -2,31 +2,56 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5">
+    android:background="#EEF2F7">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="24dp"
+        android:paddingBottom="20dp">
 
-        <TextView
+        <!-- Title row: emoji + text inline -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="📋 Today's Event Board"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:textColor="#2E7D32"
-            android:padding="8dp"/>
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📋"
+                android:textSize="22sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Today's Events"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#1A2744"
+                android:layout_marginLeft="8dp"/>
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/events_status"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="13sp"
-            android:textColor="#666"
-            android:padding="8dp"
-            android:layout_marginBottom="8dp"/>
+            android:textColor="#5D7080"
+            android:layout_marginTop="4dp"/>
+
+        <!-- Subtle divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#D8E2ED"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="16dp"/>
 
         <LinearLayout
             android:id="@+id/events_container"

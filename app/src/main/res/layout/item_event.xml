@@ -5,26 +5,30 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="12dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="4dp">
+    app:cardCornerRadius="14dp"
+    app:cardElevation="4dp"
+    app:cardBackgroundColor="#FFFFFF">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp">
+        android:orientation="horizontal">
 
+        <!-- Left accent bar -->
         <View
             android:layout_width="5dp"
             android:layout_height="match_parent"
-            android:background="#1F497D"
-            android:layout_marginRight="12dp"/>
+            android:background="@drawable/hero_gradient"/>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="14dp"
+            android:paddingBottom="14dp">
 
             <TextView
                 android:id="@+id/event_title"
@@ -32,24 +36,46 @@
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="#1F497D"/>
+                android:textColor="#1A2744"/>
 
             <TextView
                 android:id="@+id/event_desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="13sp"
-                android:textColor="#444444"
+                android:textColor="#5D7080"
                 android:layout_marginTop="4dp"/>
 
-            <TextView
-                android:id="@+id/event_time"
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#EDF1F5"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="8dp"/>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textColor="#2E7D32"
-                android:textStyle="bold"
-                android:layout_marginTop="4dp"/>
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="⏰"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:id="@+id/event_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textColor="#1F497D"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="4dp"/>
+
+            </LinearLayout>
+
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

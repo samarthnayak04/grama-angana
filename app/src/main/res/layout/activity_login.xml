@@ -2,97 +2,147 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5">
+    android:fillViewport="true"
+    android:background="@drawable/hero_gradient">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="24dp"
-        android:gravity="center">
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="🏛️"
-            android:textSize="64sp"
-            android:layout_marginTop="48dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Grama-Angana"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            android:textColor="#2E7D32"
-            android:layout_marginTop="8dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Community Space Manager"
-            android:textSize="14sp"
-            android:textColor="#666"
-            android:layout_marginBottom="32dp"/>
-
-        <TextView
-            android:id="@+id/title_text"
+        <!-- Hero / Brand Section -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Login to Grama-Angana"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="16dp"/>
+            android:orientation="vertical"
+            android:gravity="center"
+            android:paddingTop="72dp"
+            android:paddingBottom="40dp"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp">
 
-        <EditText
-            android:id="@+id/input_name"
+            <FrameLayout
+                android:layout_width="88dp"
+                android:layout_height="88dp"
+                android:background="@drawable/logo_circle_bg">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="🏛"
+                    android:textSize="42sp"
+                    android:gravity="center"/>
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="GRAMA ANGANA"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:letterSpacing="0.12"
+                android:layout_marginTop="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Community Space Manager"
+                android:textSize="13sp"
+                android:textColor="#BDD7EE"
+                android:layout_marginTop="4dp"/>
+
+        </LinearLayout>
+
+        <!-- Form Card -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Your Name"
-            android:inputType="textPersonName"
-            android:padding="14dp"
-            android:background="@android:drawable/edit_text"
-            android:layout_marginBottom="12dp"/>
+            android:orientation="vertical"
+            android:background="@drawable/card_rounded_top"
+            android:paddingLeft="28dp"
+            android:paddingRight="28dp"
+            android:paddingTop="32dp"
+            android:paddingBottom="40dp">
 
-        <EditText
-            android:id="@+id/input_phone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Phone Number (10 digits)"
-            android:inputType="phone"
-            android:maxLength="10"
-            android:padding="14dp"
-            android:background="@android:drawable/edit_text"
-            android:layout_marginBottom="12dp"/>
+            <TextView
+                android:id="@+id/title_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Login to Grama-Angana"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#1A2744"
+                android:layout_marginBottom="6dp"/>
 
-        <EditText
-            android:id="@+id/input_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:padding="14dp"
-            android:background="@android:drawable/edit_text"
-            android:layout_marginBottom="20dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sign in to manage your community hall"
+                android:textSize="13sp"
+                android:textColor="#7A8EA8"
+                android:layout_marginBottom="28dp"/>
 
-        <Button
-            android:id="@+id/btn_submit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Login"
-            android:textColor="#FFFFFF"
-            android:backgroundTint="#2E7D32"
-            android:padding="12dp"/>
+            <EditText
+                android:id="@+id/input_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Your Full Name"
+                android:inputType="textPersonName"
+                android:padding="14dp"
+                android:background="@drawable/edit_text_bg"
+                android:textColor="#1A2744"
+                android:textColorHint="#9BA8B8"
+                android:layout_marginBottom="14dp"
+                android:visibility="gone"/>
 
-        <TextView
-            android:id="@+id/toggle_mode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New user? Sign up here"
-            android:textColor="#1976D2"
-            android:textSize="14sp"
-            android:padding="16dp"
-            android:layout_marginTop="8dp"/>
+            <EditText
+                android:id="@+id/input_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Phone Number (10 digits)"
+                android:inputType="phone"
+                android:maxLength="10"
+                android:padding="14dp"
+                android:background="@drawable/edit_text_bg"
+                android:textColor="#1A2744"
+                android:textColorHint="#9BA8B8"
+                android:layout_marginBottom="14dp"/>
+
+            <EditText
+                android:id="@+id/input_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:padding="14dp"
+                android:background="@drawable/edit_text_bg"
+                android:textColor="#1A2744"
+                android:textColorHint="#9BA8B8"
+                android:layout_marginBottom="28dp"/>
+
+            <Button
+                android:id="@+id/btn_submit"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="Login"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:background="@drawable/btn_primary_bg"
+                android:stateListAnimator="@null"/>
+
+            <TextView
+                android:id="@+id/toggle_mode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="New user? Sign up here"
+                android:textColor="#1F497D"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:padding="16dp"
+                android:layout_marginTop="4dp"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 </ScrollView>
