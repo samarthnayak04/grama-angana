@@ -23,53 +23,63 @@ class MyBookingsFragment : Fragment() {
 
         statusText.text = "Loading your bookings..."
 
-        FirebaseDatabase.getInstance().getReference("bookings")
+        val query = FirebaseDatabase.getInstance().getReference("bookings")
             .orderByChild("userPhone").equalTo(userPhone)
-            .addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    container2.removeAllViews()
-                    if (!snapshot.exists()) {
-                        statusText.text = "📭 You have no bookings yet"
-                        return
-                    }
-                    var count = 0
-                    for (child in snapshot.children) {
-                        val purpose = child.child("purpose").getValue(String::class.java) ?: ""
-                        val date = child.child("date").getValue(String::class.java) ?: ""
-                        val startTime = child.child("startTime").getValue(String::class.java) ?: ""
-                        val endTime = child.child("endTime").getValue(String::class.java) ?: ""
-                        val status = child.child("status").getValue(String::class.java) ?: "pending"
 
-                        val card = layoutInflater.inflate(R.layout.item_my_booking, container2, false)
-                        card.findViewById<TextView>(R.id.mb_purpose).text = purpose
-                        card.findViewById<TextView>(R.id.mb_date).text = "📅 $date"
-                        card.findViewById<TextView>(R.id.mb_time).text = "🕐 $startTime - $endTime"
+        val listener = object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                container2.removeAllViews()
+                if (!snapshot.exists()) {
+                    statusText.text = "📭 You have no bookings yet"
+                    return
+                }
+                var count = 0
+                for (child in snapshot.children) {
+                    val purpose = child.child("purpose").getValue(String::class.java) ?: ""
+                    val date = child.child("date").getValue(String::class.java) ?: ""
+                    val startTime = child.child("startTime").getValue(String::class.java) ?: ""
+                    val endTime = child.child("endTime").getValue(String::class.java) ?: ""
+                    val status = child.child("status").getValue(String::class.java) ?: "pending"
 
-                        val statusView = card.findViewById<TextView>(R.id.mb_status)
-                        when (status) {
-                            "approved" -> {
-                                statusView.text = "✅ Approved"
-                                statusView.setTextColor(android.graphics.Color.parseColor("#2E7D32"))
-                            }
-                            "rejected" -> {
-                                statusView.text = "❌ Rejected"
-                                statusView.setTextColor(android.graphics.Color.RED)
-                            }
-                            else -> {
-                                statusView.text = "⏳ Pending"
-                                statusView.setTextColor(android.graphics.Color.parseColor("#F57C00"))
-                            }
+                    val card = layoutInflater.inflate(R.layout.item_my_booking, container2, false)
+                    card.findViewById<TextView>(R.id.mb_purpose).text = purpose
+                    card.findViewById<TextView>(R.id.mb_date).text = "📅 $date"
+                    card.findViewById<TextView>(R.id.mb_time).text = "🕐 $startTime - $endTime"
+
+                    val statusView = card.findViewById<TextView>(R.id.mb_status)
+                    when (status) {
+                        "approved" -> {
+                            statusView.text = "✅ Approved"
+                            statusView.setTextColor(android.graphics.Color.parseColor("#2E7D32"))
                         }
-                        container2.addView(card)
-                        count++
+                        "rejected" -> {
+                            statusView.text = "❌ Rejected"
+                            statusView.setTextColor(android.graphics.Color.RED)
+                        }
+                        else -> {
+                            statusView.text = "⏳ Pending"
+                            statusView.setTextColor(android.graphics.Color.parseColor("#F57C00"))
+                        }
                     }
-                    statusText.text = "📋 You have $count booking(s)"
+                    container2.addView(card)
+                    count++
                 }
+                statusText.text = "📋 You have $count booking(s)"
+            }
 
-                override fun onCancelled(error: DatabaseError) {
-                    statusText.text = "❌ Could not load bookings"
-                }
-            })
+            override fun onCancelled(error: DatabaseError) {
+                statusText.text = "❌ Could not load bookings"
+            }
+        }
+
+        query.addValueEventListener(listener)
+
+        view.addOnAttachStateChangeListener(object : View.OnAttachStateChangeListener {
+            override fun onViewAttachedToWindow(v: View) {}
+            override fun onViewDetachedFromWindow(v: View) {
+                query.removeEventListener(listener)
+            }
+        })
 
         return view
     }

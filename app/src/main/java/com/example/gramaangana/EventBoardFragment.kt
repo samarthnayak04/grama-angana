@@ -16,7 +16,7 @@ class EventBoardFragment : Fragment() {
 
         val ref = FirebaseDatabase.getInstance().getReference("events")
 
-        ref.addListenerForSingleValueEvent(object : ValueEventListener {
+        val listener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 // Seed default events if Firebase is empty (for first-time demo)
                 if (!snapshot.exists()) {
@@ -51,6 +51,12 @@ class EventBoardFragment : Fragment() {
             override fun onCancelled(error: DatabaseError) {
                 statusText.text = "❌ Could not load events. Check internet."
             }
+        }
+        ref.addValueEventListener(listener)
+
+        view.addOnAttachStateChangeListener(object : View.OnAttachStateChangeListener {
+            override fun onViewAttachedToWindow(v: View) {}
+            override fun onViewDetachedFromWindow(v: View) { ref.removeEventListener(listener) }
         })
 
         return view
